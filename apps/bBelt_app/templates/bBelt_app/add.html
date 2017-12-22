@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Add a Trip</title>
+</head>
+    <body>
+    	<h4>Add a trip:</h4>
+    	<a href="/home">Home</a><br>
+    	<a href="/logout">Log Out</a><br><br>
+    	
+
+    	<form action="add_travel" method="post">
+    		{% csrf_token %}
+    		<label>Destination</label>
+    		<input type="text" name="destination"><br>
+    		<label>Description</label>
+    		<input type="text" name="description"><br><br>
+    		<label>Please input the travel dates in the following format:</label>
+    		<label>MM/DD/YYYY</label><br><br>
+    		<label>Travel Date From:</label>
+    		<input type="text" name="start_date"><br>
+    		<label>Travel Date To:</label>
+    		<input type="text" name="end_date"><br>
+    		<input type="submit" value="Add Trip"><br>
+    	</form>
+
+    	<!-- Validations -->
+    	<div>
+    		{% if messages %}
+                {% for message in messages %}
+                    <p>{{message}}</p>
+                {% endfor %}
+            {% endif %}
+    	</div>
+
+    </body>
+</html>

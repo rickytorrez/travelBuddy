@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Hola</title>
+</head>
+<body>
+    <h3>Welcome Back, {{user.name}}!</h3>
+    <a href="/logout">Log Out</a>
+    <a href="/add">Add a Trip</a>
+    <h4>Your Trip Schedules</h4>
+    <table border="1">
+    	<tr>
+    		
+    		<th>Destination</th>
+    		<th>Travel Start Date</th>
+    		<th>Travel End Date</th>
+    		<th>Plan</th>
+    		<th>Change Itinerary</th>
+    	</tr>
+    	{% for trip in trips %}
+    	<tr>	
+    		<td><a href="/trip/{{trip.id}}">{{trip.destination}}</a></td>
+    		<td>{{trip.start_date}}</td>
+    		<td>{{trip.end_date}}</td>
+    		<td>{{trip.plan}}</td>
+    		<td></td>	
+    	</tr>
+    	{% endfor %}
+    	{% for attend in attending %}
+    	<tr>
+    		
+			<td><a href="/trip/{{attend.trip.id}}">{{attend.trip.destination}}</a></td>
+    		<td>{{attend.trip.start_date}}</td>
+    		<td>{{attend.trip.end_date}}</td>
+    		<td>{{attend.trip.plan}}</td>
+    		<td><a href="/remove/{{attend.trip.id}}"><button>Leave Trip</button></a></td>
+    		
+    	</tr>{% endfor %}
+    </table>
+	<br><br><br><br><hr>
+    <h4>Other User's Plans</h4>
+    <table border="1">
+    	<tr>    
+    		<th>Name</th>
+    		<th>Destination</th>
+    		<th>Travel Start Date</th>
+    		<th>Travel End Date</th>
+    		<th>Plan</th>
+  			<th>Interested?</th>
+    	</tr>
+    	<tr>
+
+    		{% for single_trip in notMyTrips%}
+    			{% for other in otherTrips %}
+    				{% if single_trip == other.id %}
+			    		<td>{{other.user.name}}</td>
+			    		<td><a href="/trip/{{other.id}}">{{other.destination}}</a></td>
+			    		<td>{{other.start_date}}</td>
+			    		<td>{{other.end_date}}</td>
+			    		<td>{{other.plan}}</td>
+			    		<td><a href="/join/{{other.id}}"><button>Join</button></a></td>
+    	</tr>
+	    			{% endif %}
+	    		{% endfor %}
+	    	{% endfor %}
+		
+
+
+    </table>
+
+</body>
+</html>
